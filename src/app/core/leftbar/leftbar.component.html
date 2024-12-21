@@ -1,0 +1,14 @@
+<div class="leftbar bg-secondary bg-gradient">
+    <ul>
+        @for(items of navItems; track items){
+        <li class="navItems" routerLink="{{items.route}}" routerLinkActive="active" matTooltip="{{items.tooltip | titlecase}}"
+            matTooltipPosition="right" role="button">
+            <mat-icon>{{items.icon}}</mat-icon>
+        </li>
+        }
+
+        <li class="navItems" matTooltip="Log out" matTooltipPosition="right" role="button" (click)="logoutClicked()">
+            <mat-icon>power_settings_new</mat-icon>
+        </li>
+    </ul>
+</div>

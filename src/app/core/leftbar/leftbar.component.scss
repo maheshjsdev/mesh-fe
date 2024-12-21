@@ -1,0 +1,60 @@
+.leftbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 64px;
+    width: 60px;
+    padding-top: 10px;
+
+    ul {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0;
+
+        .navItems {
+            list-style: none;
+            width: 50px;
+            margin: 5px;
+            background-color: transparent;
+            position: relative;
+            left: -17px;
+            display: flex;
+            justify-content: center;
+            height: 36px;
+            align-items: center;
+            transition: 200ms linear;
+
+            &:hover {
+                background-color: rgb(215, 200, 198);
+            }
+
+        }
+
+        .navItems:last-child {
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            background: red;
+            width: 60px;
+
+            .mat-icon {
+                color: #fff;
+            }
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            width: 3px;
+            height: 100%;
+            background-color:  blueviolet;
+        }
+
+
+    }
+
+}

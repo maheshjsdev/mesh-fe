@@ -1,0 +1,15 @@
+section.login {
+    padding: 50px 20px;
+    max-width: 501px;
+    width: 100%;
+    background: antiquewhite;
+    border-radius: 12px;
+    min-height: 400px;
+}
+
+@media(max-width:576px) {
+    section.login {
+        padding: 40px 10px;
+        width: 100%;
+    }
+}

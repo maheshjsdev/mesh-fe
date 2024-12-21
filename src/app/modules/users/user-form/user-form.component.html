@@ -1,0 +1,59 @@
+<div class="customDialog">
+    <div class="row">
+        <h4 class="text-center">User {{formName}} Form</h4>
+        <div class="col-md-12">
+            <mat-dialog-content>
+                <form [formGroup]="addUserForm" novalidate>
+                    <div class="row m-0">
+                        <div class="col-md-12 mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" matInput placeholder="Placeholder" autocomplete="off"
+                                    formControlName="first_name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Last Name</mat-label>
+                                <input type="text" matInput placeholder="Placeholder" autocomplete="off"
+                                    formControlName="last_name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Email</mat-label>
+                                <input type="email" matInput placeholder="Placeholder" autocomplete="off"
+                                    formControlName="email">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Mobile no.</mat-label>
+                                <input type="number" matInput placeholder="Placeholder" autocomplete="off"
+                                    formControlName="mobile_no">
+                            </mat-form-field>
+                        </div>
+                        @if(isPasswordField){
+                        <div class="col-md-12 mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Enter your password</mat-label>
+                                <input [type]="hide() ? 'password' : 'text'" matInput placeholder="Placeholder"
+                                    formControlName="password" autocomplete="off">
+                                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide 
+                             password'" [attr.aria-pressed]="hide()">
+                                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                        }
+                    </div>
+                    <div class="col-md-12 d-flex gap-3 justify-content-end align-items-center">
+                        <button mat-flat-button (click)="closePopup()">Cancel</button>
+                        <button mat-flat-button color="primary" [disabled]="addUserForm.invalid"
+                            (click)="saveUserClicked('add')">{{formBtn}}</button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>
