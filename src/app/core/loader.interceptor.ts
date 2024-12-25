@@ -8,28 +8,31 @@ import {
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-  constructor(public _loaderServ: LoaderService) {}
+  constructor(private _loaderServ: LoaderService, private _sharedServ:SharedService) {
+  }
 
-  intercept(
-    request: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const isAuthenticated = localStorage.getItem('authMsg') ? true : false;
+
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const authToken = this._sharedServ.currentUser.getToken;
     this._loaderServ.show();
-    if (isAuthenticated) {
-      return next.handle(request).pipe(
+    if (authToken) {
+      const authReq = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authToken}`
+        }
+      });
+      return next.handle(authReq).pipe(
         finalize(() => {
           this._loaderServ.hide();
-          console.log(request)
         })
       );
     } else {
       return next.handle(request).pipe(
         finalize(() => {
-          console.log('Hide');
           this._loaderServ.hide();
         })
       );

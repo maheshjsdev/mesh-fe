@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/shared.service';
 import { LoaderService } from '../loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loader',
@@ -9,19 +10,19 @@ import { LoaderService } from '../loader.service';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {
+export class LoaderComponent implements OnInit{
   loaderUrl?: string;
-  isLoading1: boolean = false;
+  isLoading$?: Observable<boolean>;
   constructor(
     private _sharedServ: SharedService,
-    public _loaderServ: LoaderService,
+    private _loaderServ: LoaderService,
     private cdr: ChangeDetectorRef
   ) {
-    this._loaderServ.isLoading$.subscribe((loading: boolean) => {
-      this.isLoading1 = loading;
-      console.log(loading);
-    });
     this.loaderUrl = './assets/img/profile.jpg';
-    console.log('loader is working');
+    
+  }
+  ngOnInit(): void {
+    this.isLoading$ = this._loaderServ.isLoading$
+
   }
 }

@@ -2,12 +2,15 @@ export class currentUserState {
   private firstName?: string;
   private lastName?: string;
   private email?: string;
-  private authMsg?: any;
+  private authMsg?: string;
+  private token?: string;
 
   set setCurrentUser(CurrentUser: any) {
     this.firstName = CurrentUser.first_name;
     this.lastName = CurrentUser.last_name;
     this.email = CurrentUser.email;
+    this.token = CurrentUser.token;
+    this.authMsg = CurrentUser.msg;
   }
 
   set authGaurdMsg(msg: any) {
@@ -25,5 +28,8 @@ export class currentUserState {
   }
   getAuthMsg() {
     return this.authMsg;
+  }
+  get getToken() {
+    return this.token;
   }
 }

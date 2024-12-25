@@ -15,6 +15,8 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  forgetForm: FormGroup;
+  isLoginPage: boolean = true;
   hide = signal(true);
   constructor(
     private _fb: FormBuilder,
@@ -26,6 +28,9 @@ export class LoginComponent {
     this.loginForm = this._fb.group({
       email: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    this.forgetForm = this._fb.group({
+      email: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
   clickEvent(event: MouseEvent) {
@@ -39,8 +44,10 @@ export class LoginComponent {
       this._authServ.userLogin(formData).subscribe({
         next: (res: any) => {
           if (res.success === true) {
+            res.user.token = res.token;
             this._sharedServ.setCurrentUser = res.user;
             this._sharedServ.AuthGaurdMsg = res.success;
+            this._sharedServ.setToken = res.token;
             this._sharedServ.isAuthenticated.next(true);
             this._router.navigateByUrl('/home');
             this.loginForm.reset();
@@ -62,5 +69,11 @@ export class LoginComponent {
         },
       });
     }
+  };
+  forgetClicked = () => {
+    this.isLoginPage = false;
+  };
+  backToLogin = () => {
+    this.isLoginPage = true;
   };
 }

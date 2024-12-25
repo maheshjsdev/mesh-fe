@@ -28,4 +28,11 @@ export class SharedService {
   clearLocalStorage = (): void => {
     localStorage.clear();
   };
+  get getToken() {
+    return localStorage.getItem('token');
+  }
+
+  set setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
 }

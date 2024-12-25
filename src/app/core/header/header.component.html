@@ -18,7 +18,7 @@
             <p class="m-0">{{userName | titlecase}}</p>
             <p>{{email}}</p>
         </div>
-        <button mat-mini-fab matTooltip="Logout" class="m-3">
+        <button mat-mini-fab matTooltip="Logout" class="m-3" (click)="logoutClicked()">
             <mat-icon>power_settings_new</mat-icon>
         </button>
 
