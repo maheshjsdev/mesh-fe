@@ -10,19 +10,17 @@ import { Observable } from 'rxjs';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent implements OnInit{
+export class LoaderComponent {
   loaderUrl?: string;
-  isLoading$?: Observable<boolean>;
+  isLoading: boolean = false;
   constructor(
     private _sharedServ: SharedService,
     private _loaderServ: LoaderService,
     private cdr: ChangeDetectorRef
   ) {
     this.loaderUrl = './assets/img/profile.jpg';
-    
-  }
-  ngOnInit(): void {
-    this.isLoading$ = this._loaderServ.isLoading$
-
+    this._loaderServ.isLoading$.subscribe((loading: boolean) => {
+      this.isLoading = loading;
+    });
   }
 }
