@@ -17,6 +17,8 @@ export class LoginComponent {
   loginForm: FormGroup;
   forgetForm: FormGroup;
   isLoginPage: boolean = true;
+  forgetBtnName: string = 'Verify';
+  isEmailVerified: boolean = false;
   hide = signal(true);
   constructor(
     private _fb: FormBuilder,
@@ -31,6 +33,7 @@ export class LoginComponent {
     });
     this.forgetForm = this._fb.group({
       email: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
   clickEvent(event: MouseEvent) {
@@ -75,5 +78,28 @@ export class LoginComponent {
   };
   backToLogin = () => {
     this.isLoginPage = true;
+  };
+
+  verifyClicked = () => {
+    const formData = this.forgetForm.getRawValue();
+    this._authServ.verifyingEmail(formData).subscribe({
+      next: (res: any) => {
+        this.isEmailVerified = res.success;
+        this.forgetBtnName = 'Reset Password';
+        if (res.result.affectedRows == 1) {
+          Swal.fire('Done!', '', 'success');
+          this.backToLogin();
+          this.forgetForm.reset();
+          this.loginForm.reset();
+        }
+      },
+      error: (res) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      },
+    });
   };
 }

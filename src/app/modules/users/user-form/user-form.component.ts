@@ -2,7 +2,7 @@ import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import Swal from 'sweetalert2';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -21,6 +21,7 @@ export class UserFormComponent {
     private _fb: FormBuilder,
     private _userServ: UserService,
     private _dialog: MatDialog,
+    public dialogRef: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addUserForm = this._fb.group({
@@ -58,8 +59,8 @@ export class UserFormComponent {
     event.stopPropagation();
   }
 
-  closePopup = () => {
-    this._dialog.closeAll();
+  closePopup = (ele:string) => {
+    this.dialogRef.close(ele);
   };
 
   editUser = () => {
@@ -75,7 +76,7 @@ export class UserFormComponent {
       this._userServ.addUser(formData).subscribe({
         next: (res) => {
           Swal.fire('Done!', '', 'success');
-          this.closePopup();
+          this.closePopup('popupDone');
           this.addUserForm.reset();
         },
         error: (res) => {
@@ -91,7 +92,7 @@ export class UserFormComponent {
       this._userServ.editUser(formData).subscribe({
         next: (res) => {
           Swal.fire('Done!', '', 'success');
-          this.closePopup();
+          this.closePopup('popupDone');
           this.addUserForm.reset();
         },
         error: (res) => {

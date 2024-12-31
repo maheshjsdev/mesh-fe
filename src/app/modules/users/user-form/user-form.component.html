@@ -48,7 +48,7 @@
                         }
                     </div>
                     <div class="col-md-12 d-flex gap-3 justify-content-end align-items-center">
-                        <button mat-flat-button (click)="closePopup()">Cancel</button>
+                        <button mat-flat-button (click)="closePopup('popupNotDone')">Cancel</button>
                         <button mat-flat-button color="primary" [disabled]="addUserForm.invalid"
                             (click)="saveUserClicked('add')">{{formBtn}}</button>
                     </div>

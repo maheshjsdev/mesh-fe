@@ -6,6 +6,7 @@
     top: 64px;
     width: 60px;
     padding-top: 10px;
+    background-color: rgb(4, 47, 46) !important;
 
     ul {
         display: flex;
@@ -28,7 +29,7 @@
             transition: 200ms linear;
 
             &:hover {
-                background-color: rgb(215, 200, 198);
+                background-color: rgb(19, 78, 74);
             }
 
         }
@@ -37,7 +38,7 @@
             position: absolute;
             bottom: -5px;
             left: -5px;
-            background: red;
+            background: rgb(185 28 28);
             width: 60px;
 
             .mat-icon {

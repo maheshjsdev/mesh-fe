@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserFormComponent } from '../user-form/user-form.component';
@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss',
 })
-export class UserDashboardComponent {
+export class UserDashboardComponent implements OnInit{
   statusText?: string;
   displayedColumns: string[] = [
     'first_name',
@@ -30,6 +30,10 @@ export class UserDashboardComponent {
   ) {
     this._sharedServ.isAuthenticated.next(true);
     this.getUser();
+    console.log('contructor')
+  }
+  ngOnInit(): void {
+    console.log("ngoninit")
   }
 
   applyFilter(event: Event) {
@@ -40,8 +44,10 @@ export class UserDashboardComponent {
     const dialog = this._dialog.open(UserFormComponent, {
       data: { user: user, actionKey: action },
     });
-    dialog.afterClosed().subscribe(() => {
-      this.getUser();
+    dialog.afterClosed().subscribe((res) => {
+      if (res === 'popupDone') {
+        this.getUser();
+      }
     });
   }
 

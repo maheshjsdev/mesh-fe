@@ -1,17 +1,23 @@
-.profile {
-    img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid burlywood;
-    }
-}
+.navbar-expand-lg {
+    background-color: rgb(75 85 99) !important;
 
-.navbar-brand {
-    img {
-        height: 55px;
-        width: 55px;
+    .profile {
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid burlywood;
+        }
     }
+
+    .navbar-brand {
+        img {
+            height: 55px;
+            width: 55px;
+        }
+    }
+
+
 }
 
 ::ng-deep.mat-mdc-menu-panel {
@@ -21,27 +27,27 @@
     }
 
     min-width: 300px !important;
-}
 
-.profileBlock {
-    min-width: 300px;
-    width: 100%;
-    overflow: hidden !important;
+    .profileBlock {
+        min-width: 300px;
+        width: 100%;
+        overflow: hidden !important;
 
-    .imageBlock {
-        background: red;
-        position: relative;
-        height: 75px;
+        .imageBlock {
+            background:rgb(22 78 99);
+            position: relative;
+            height: 75px;
 
-        img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            position: absolute;
-            left: 50%;
-            top:15%;
-            transform: translate(-50%);
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                position: absolute;
+                left: 50%;
+                top: 15%;
+                transform: translate(-50%);
+            }
         }
     }
 }

@@ -12,11 +12,55 @@ html {
     ));
 }
 
+:root {
+  --mdc-fab-small-container-color: rgb(19, 78, 74);
+  --mat-fab-small-foreground-color: #ffe5e5;
+  --mdc-switch-selected-track-color: rgb(19, 78, 74);
+  --mdc-switch-unselected-track-color: rgb(19, 78, 74);
+  --mdc-outlined-text-field-outline-color: rgb(212 212 216);
+  // --mdc-outlined-text-field-outline-width:#ffe5e5;
+  --mdc-outlined-text-field-label-text-color: #ffe5e5 !important;
+  --mdc-outlined-text-field-hover-outline-color: #ddd;
+  --mdc-outlined-text-field-hover-label-text-color: #ffe5e5;
+  --mdc-outlined-text-field-input-text-color: #ffe5e5;
+  // mat icon color
+  --mdc-icon-button-icon-color:rgb(212 212 216);
+
+  @include mat.table-overrides((background-color:rgb(28 25 23),
+      header-headline-color: #ffe5e5,
+      row-item-label-text-color:#ffe5e5,
+    ));
+
+  @include mat.button-overrides((filled-container-color:rgb(19, 78, 74),
+      filled-label-text-color:#ffe5e5,
+      filled-disabled-container-color:rgb(4 47 46),
+      filled-disabled-label-text-color:rgb(15 118 110),
+      // small-container-color:#60625f,
+    ));
+  @include mat.dialog-overrides((container-color: rgb(23 23 23),
+    ));
+  @include mat.form-field-overrides((outlined-error-hover-label-text-color:red,
+      filled-error-hover-label-text-color:red,
+      filled-error-caret-color:red,
+      outlined-error-hover-outline-color:red,
+      trailing-icon-color:rgb(212 212 216),
+
+    ));
+
+  @include mat.menu-overrides((container-color:rgb(8 51 68),
+    ));
+    @include mat.progress-spinner-overrides((
+      active-indicator-color: rgb(212 212 216),
+    ));
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 html,
 body {
   height: 100%;
+  background-color: rgb(30 41 59) !important;
+  color: #ffe5e5 !important;
 }
 
 body {
@@ -80,4 +124,8 @@ main.loginBased {
 
 h2#swal2-title {
   font-size: 25px;
+  color: rgb(212 212 216) !important;
+}
+div:where(.swal2-container) div:where(.swal2-popup){
+  background-color: rgb(8 47 73) !important;
 }

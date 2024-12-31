@@ -1,3 +1,23 @@
 // td.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-userStatus.mat-column-userStatus {
 //     width: 20% !important;
 // }
+.mat-column-first_name{
+    width: 15% !important;
+    min-width: 130px;
+}
+.mat-column-last_name{
+    width: 15% !important;
+    min-width: 120px;
+}
+.mat-column-email{
+    width: 30% !important;
+    min-width: 150px;
+}
+.mat-column-mobile_no{
+    width: 15% !important;
+    min-width: 100px;
+}
+.mat-column-action{
+    width: 20% !important;
+    min-width: 100px;
+}

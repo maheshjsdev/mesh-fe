@@ -2,21 +2,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row m-0">
-                <div class="col-md-8 ps-0">
+                <div class="col-md-8 px-0">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Search...</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Name" #input>
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                 </div>
-                <div class="col-md-4 d-flex align-items-center justify-content-end mt-2">
+                <div class="col-md-4 px-0 d-flex align-items-center justify-content-end mt-2">
                     <button mat-flat-button color="primary" (click)="openDialog(0,'add')"> <mat-icon
                             fontIcon="add"></mat-icon>Add User</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 pt-3 pb-4">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <div class="col-md-12 pt-3 pb-4 overflow-auto">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100%">
                 <!-- Position Column -->
                 <ng-container matColumnDef="first_name">
                     <th mat-header-cell *matHeaderCellDef> First Name </th>

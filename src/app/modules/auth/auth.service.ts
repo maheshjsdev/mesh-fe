@@ -14,4 +14,7 @@ export class AuthService {
   userLogin = (formData:any) => {
     return this._http.post<any>(`${environment.API_URL}/user-management/login`, formData)
   }
+  verifyingEmail = (formData:any) => {
+    return this._http.post<any>(`${environment.API_URL}/user-management/verifyemail`, formData)
+  }
 }
