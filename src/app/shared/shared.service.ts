@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { currentUserState } from './userState';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,8 @@ export class SharedService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     this.currentUser.setCurrentUser = user;
 
-    const authMsgValue = localStorage.getItem('authMsg')
+    const authMsgValue = localStorage.getItem('authMsg');
     this.currentUser.authGaurdMsg = authMsgValue;
-
   }
 
   set setCurrentUser(user: any) {
@@ -35,4 +35,23 @@ export class SharedService {
   set setToken(token: string) {
     localStorage.setItem('token', token);
   }
+
+  successPopup = () => {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Done!',
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
+  errorPopup = () => {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Done!',
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
 }

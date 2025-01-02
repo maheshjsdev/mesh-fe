@@ -27,7 +27,7 @@ export class LeftbarComponent {
         this._sharedServ.isAuthenticated.next(false);
         this._router.navigateByUrl('/login');
         this._sharedServ.clearLocalStorage();
-        Swal.fire('Done!', '', 'success');
+        this._sharedServ.successPopup();
       }
     });
   };

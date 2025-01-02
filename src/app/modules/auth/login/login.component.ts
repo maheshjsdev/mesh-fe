@@ -60,15 +60,13 @@ export class LoginComponent {
               icon: 'error',
               title: 'Oops...',
               text: 'Invaild email or password !',
+              showConfirmButton: false,
+              timer: 2000,
             });
           }
         },
         error: (res) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
+         this._sharedServ.errorPopup();
         },
       });
     }
@@ -87,18 +85,14 @@ export class LoginComponent {
         this.isEmailVerified = res.success;
         this.forgetBtnName = 'Reset Password';
         if (res.result.affectedRows == 1) {
-          Swal.fire('Done!', '', 'success');
+          this._sharedServ.successPopup();
           this.backToLogin();
           this.forgetForm.reset();
           this.loginForm.reset();
         }
       },
       error: (res) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
+        this._sharedServ.errorPopup();
       },
     });
   };

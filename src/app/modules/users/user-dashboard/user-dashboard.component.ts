@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss',
 })
-export class UserDashboardComponent implements OnInit{
+export class UserDashboardComponent implements OnInit {
   statusText?: string;
   displayedColumns: string[] = [
     'first_name',
@@ -30,10 +30,8 @@ export class UserDashboardComponent implements OnInit{
   ) {
     this._sharedServ.isAuthenticated.next(true);
     this.getUser();
-    console.log('contructor')
   }
   ngOnInit(): void {
-    console.log("ngoninit")
   }
 
   applyFilter(event: Event) {
@@ -64,7 +62,6 @@ export class UserDashboardComponent implements OnInit{
       id: id,
       user_status: status,
     };
-    console.log(formData);
     Swal.fire({
       title: `Are you sure to change ${this.statusText} status ?`,
       showCancelButton: true,
@@ -74,14 +71,10 @@ export class UserDashboardComponent implements OnInit{
         this._userServ.chnageUserStatus(formData).subscribe({
           next: (res) => {
             this.getUser();
-            Swal.fire('Done!', '', 'success');
+            this._sharedServ.successPopup();
           },
           error: (res) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            });
+          this._sharedServ.errorPopup();
           },
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -102,14 +95,10 @@ export class UserDashboardComponent implements OnInit{
         this._userServ.deleteUser(formData).subscribe({
           next: (res) => {
             this.getUser();
-            Swal.fire('Done!', '', 'success');
+            this._sharedServ.successPopup();
           },
           error: (res) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            });
+            this._sharedServ.errorPopup();
           },
         });
       }

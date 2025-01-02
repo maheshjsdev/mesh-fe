@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import Swal from 'sweetalert2';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SharedService } from '../../../shared/shared.service';
 
 @Component({
   selector: 'app-user-form',
@@ -22,6 +23,7 @@ export class UserFormComponent {
     private _userServ: UserService,
     private _dialog: MatDialog,
     public dialogRef: MatDialogRef<UserFormComponent>,
+    private _sharedServ:SharedService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addUserForm = this._fb.group({
@@ -59,7 +61,7 @@ export class UserFormComponent {
     event.stopPropagation();
   }
 
-  closePopup = (ele:string) => {
+  closePopup = (ele: string) => {
     this.dialogRef.close(ele);
   };
 
@@ -75,32 +77,24 @@ export class UserFormComponent {
 
       this._userServ.addUser(formData).subscribe({
         next: (res) => {
-          Swal.fire('Done!', '', 'success');
+        this._sharedServ.successPopup();
           this.closePopup('popupDone');
           this.addUserForm.reset();
         },
         error: (res) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
+          this._sharedServ.errorPopup();
         },
       });
     } else {
       var formData = this.addUserForm.getRawValue();
       this._userServ.editUser(formData).subscribe({
         next: (res) => {
-          Swal.fire('Done!', '', 'success');
+          this._sharedServ.successPopup();
           this.closePopup('popupDone');
           this.addUserForm.reset();
         },
         error: (res) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
+          this._sharedServ.errorPopup();
         },
       });
     }
