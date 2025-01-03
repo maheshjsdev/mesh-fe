@@ -2,14 +2,23 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row m-0">
-                <div class="col-md-8 px-0">
+                <div class="col-12 col-md-12 col-lg-7 ps-0 mb-2">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Search...</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Name" #input>
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                 </div>
-                <div class="col-md-4 px-0 d-flex align-items-center justify-content-end mt-2">
+                <div class="col-6 col-md-8 col-lg-3 ps-0">
+                    <mat-form-field class="w-100">
+                        <mat-label>Status</mat-label>
+                        <mat-select #statusDropdown (selectionChange)="selectUserStatus($event)">
+                            <mat-option value="1">Active</mat-option>
+                            <mat-option value="0">Inactive</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 px-0 d-flex align-items-center justify-content-end">
                     <button mat-flat-button color="primary" (click)="openDialog(0,'add')"> <mat-icon
                             fontIcon="add"></mat-icon>Add User</button>
                 </div>

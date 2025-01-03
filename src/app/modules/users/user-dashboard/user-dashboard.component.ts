@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserFormComponent } from '../user-form/user-form.component';
 import Swal from 'sweetalert2';
 import { SharedService } from '../../../shared/shared.service';
 import { UserService } from '../user.service';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,6 +15,7 @@ import { UserService } from '../user.service';
   styleUrl: './user-dashboard.component.scss',
 })
 export class UserDashboardComponent implements OnInit {
+  @ViewChild('statusDropdown') statusDropdown!: MatSelect;
   statusText?: string;
   displayedColumns: string[] = [
     'first_name',
@@ -23,6 +25,7 @@ export class UserDashboardComponent implements OnInit {
     'user_status',
   ];
   dataSource = new MatTableDataSource<any>([]);
+  originalData: any[] = [];
   constructor(
     private _dialog: MatDialog,
     private _sharedServ: SharedService,
@@ -31,8 +34,7 @@ export class UserDashboardComponent implements OnInit {
     this._sharedServ.isAuthenticated.next(true);
     this.getUser();
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -51,6 +53,7 @@ export class UserDashboardComponent implements OnInit {
 
   getUser = () => {
     this._userServ.getAllUser().subscribe((res: any) => {
+      this.originalData = res;
       this.dataSource = new MatTableDataSource<any>(res);
     });
   };
@@ -72,9 +75,10 @@ export class UserDashboardComponent implements OnInit {
           next: (res) => {
             this.getUser();
             this._sharedServ.successPopup();
+            this.resetStatusDropdown();
           },
           error: (res) => {
-          this._sharedServ.errorPopup();
+            this._sharedServ.errorPopup();
           },
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -104,4 +108,19 @@ export class UserDashboardComponent implements OnInit {
       }
     });
   };
+
+  selectUserStatus = (el: any) => {
+    const filterValue = el.value;
+    const filteredData = this.originalData.filter(
+      (x) => x.user_status == filterValue
+    );
+    this.dataSource.data = filteredData.length
+      ? filteredData
+      : this.originalData;
+  };
+  resetStatusDropdown() {
+    if (this.statusDropdown) {
+      this.statusDropdown.value = null; // Reset dropdown value
+    }
+  }
 }
